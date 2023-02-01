@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     .createTable('user', function (table) {
       table.increments('user_id');
       table.string('email', 255).notNullable();
-      table.string('password', 255).notNullable();
+      table.string('password_hash', 255).notNullable();
     })
     .createTable('post', function (table) {
       table.increments('post_id');
