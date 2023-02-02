@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { pgClient } from 'src/db/client';
+import { pgClient } from '../db/client';
 
 export type Post = {
   post_id: string;
