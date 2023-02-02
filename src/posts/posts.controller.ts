@@ -1,20 +1,30 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Param,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { UsersService } from '../users/users.service';
+import { PostsService } from './posts.service';
 
 @Controller('posts')
 export class PostsController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly postsService: PostsService) {}
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  addPost(@Body() body: { text: string; title: string }) {
-    return 'this.usersService.register(body)';
+  addPost(@Request() req, @Body() body: { title: string; content: string }) {
+    const userId = req.user.user_id;
+    return this.postsService.createPost(userId, body);
   }
 
-  // @Delete(':id')
-  // async deletePost(@Param('id') id: string) {
-  //   const user = await this.usersService.findByEmail(body.email);
-  //   return this.usersService.validatePassword(user, body.password);
-  // }
+  @UseGuards(JwtAuthGuard)
+  @Delete(':postId')
+  async deletePost(@Request() req, @Param('id') postId: string) {
+    const userId = req.user.user_id;
+    return this.postsService.deletePost(userId, postId);
+  }
 }

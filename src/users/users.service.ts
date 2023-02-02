@@ -22,7 +22,7 @@ export class UsersService {
 
   async findByEmail(email: string): Promise<User | undefined> {
     const client = await pgClient();
-    const users = await client.query(
+    const users = await client.query<User>(
       `SELECT *
       FROM public.user
       WHERE email = $1`,
