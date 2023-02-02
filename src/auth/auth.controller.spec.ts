@@ -1,20 +1,22 @@
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from '../users/users.service';
+import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
-describe('AuthService', () => {
-  let service: AuthService;
+describe('AuthController', () => {
+  let controller: AuthController;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [AuthService, UsersService, JwtService],
+      controllers: [AuthController],
     }).compile();
 
-    service = module.get<AuthService>(AuthService);
+    controller = module.get<AuthController>(AuthController);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(controller).toBeDefined();
   });
 });

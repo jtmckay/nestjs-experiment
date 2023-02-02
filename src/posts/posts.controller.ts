@@ -1,13 +1,15 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UsersService } from '../users/users.service';
 
 @Controller('posts')
 export class PostsController {
   constructor(private readonly usersService: UsersService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  addPost(@Body() body: { email: string; username: string; password: string }) {
-    return this.usersService.register(body);
+  addPost(@Body() body: { text: string; title: string }) {
+    return 'this.usersService.register(body)';
   }
 
   // @Delete(':id')
