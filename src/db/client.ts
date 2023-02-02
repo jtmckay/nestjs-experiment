@@ -8,8 +8,9 @@ export const pgConfig = {
 };
 
 const client = new Client(pgConfig);
+const clientConnection = client.connect();
 
 export async function pgClient() {
-  await client.connect();
+  await clientConnection;
   return client;
 }

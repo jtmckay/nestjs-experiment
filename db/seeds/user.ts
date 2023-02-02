@@ -1,5 +1,7 @@
 import { Knex } from 'knex';
-import { hashPassword } from '../../src/user/security';
+import { UsersService } from '../../src/users/users.service';
+
+const userService = new UsersService();
 
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
@@ -11,19 +13,19 @@ export async function seed(knex: Knex): Promise<void> {
       user_id: 1,
       username: 'test1',
       email: 'test1@example.com',
-      password_hash: hashPassword('test'),
+      password_hash: userService.hashPassword('test'),
     },
     {
       user_id: 2,
       username: 'test2',
       email: 'test2@example.com',
-      password_hash: hashPassword('test'),
+      password_hash: userService.hashPassword('test'),
     },
     {
       user_id: 3,
       username: 'test3',
       email: 'test3@example.com',
-      password_hash: hashPassword('test'),
+      password_hash: userService.hashPassword('test'),
     },
   ]);
 }
