@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { pgClient } from 'src/db/client';
+import { pgClient } from '../db/client';
 
 // This should be a real class/interface representing a user entity
 export type User = {
